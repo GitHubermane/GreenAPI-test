@@ -1,16 +1,20 @@
 import { useState } from "react"
 import './index.scss'
+import { check } from "../../api/api"
 
 export const WelcomePage = () => {
     const [idInstance, setIdInstance] = useState('')
     const [token, setToken] = useState('')
 
-    const onSaveData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onSaveData = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        localStorage.setItem('idInstance', idInstance)
-        localStorage.setItem('apiTokenInstance', token)
+        const res = await check(idInstance, token)
+        if (res?.data.stateInstance === "authorized") {
+            localStorage.setItem('idInstance', idInstance)
+            localStorage.setItem('apiTokenInstance', token)
+        }
     }
-    
+
     return (
         <div className="welcome-page">
             <h2 className="welcome-page__title">
