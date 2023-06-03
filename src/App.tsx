@@ -1,6 +1,6 @@
 import { WelcomePage } from "./pages/welcome";
 import './App.scss'
-import { MainPage } from "./pages/main";
+import { ChatPage } from "./pages/chat";
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {
         idInstance && apiTokenInstance 
-        ? <MainPage />
+        ? <ChatPage />
         : <WelcomePage /> 
       }
     </div>

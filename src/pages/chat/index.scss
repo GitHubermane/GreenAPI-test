@@ -1,0 +1,23 @@
+.chat-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    &__form {
+        display: flex;
+        padding: 9px;
+        background-color: #202c33;
+    }
+    &__input {
+        width: 100%;
+        border-radius: 9px;
+        padding: 9px 12px;
+    }
+    button {
+        margin: 0 10px;
+    }
+    &__messages {
+        height: 100%;
+        background: url('../../icons/background.png');
+        filter: brightness(0.25);
+    }
+}
