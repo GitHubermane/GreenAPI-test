@@ -1,0 +1,26 @@
+.message {
+    display: flex;
+    align-self: end;
+    margin: 5px 20px;
+    height: fit-content;
+    width: fit-content;
+    background-color: #005c4b;
+    border-radius: 8px;
+
+    &-other {
+        align-self: start;
+        background-color: #202c33;
+    }
+
+    &__text {
+        padding: 5px 10px;
+        font-size: 18px;
+    }
+
+    &__time {
+        align-self: end;
+        padding: 3px 5px;
+        color: #ffffff99;
+        font-size: 11px;
+    }
+}

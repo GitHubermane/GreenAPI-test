@@ -16,8 +16,16 @@
         margin: 0 10px;
     }
     &__messages {
+        display: flex;
+        flex-direction: column-reverse;
         height: 100%;
-        background: url('../../icons/background.png');
-        filter: brightness(0.25);
+        background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url("../../icons/background.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: top;
+        & > :first-child {
+            margin: 5px 20px 15px;
+        }
     }
 }
