@@ -1,0 +1,27 @@
+@import "~/src/variables.scss";
+
+.chat-form {
+    
+    &__input {
+        width: 300px;
+        padding: 5px 10px;
+        border-radius: $borderRadius;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+    button {
+        transition: all 0.2s;
+        padding: 5px 15px;
+        margin: 10px;
+        border-radius: $borderRadius;
+
+        &:hover {
+            background-color: #2a3942;
+            transition: all 0.2s;
+        }
+    }
+}

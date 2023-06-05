@@ -1,3 +1,5 @@
+@import '~/src/variables.scss';
+
 .welcome-page {
     height: 100%;
     display: flex;
@@ -18,14 +20,14 @@
             width: 400px;
             margin: 10px;
             padding: 5px 10px;
-            border-radius: 8px;
+            border-radius: $borderRadius;
         }
 
         button {
             margin-top: 20px;
             padding: 7px 15px;
             background-color: #111b21;
-            border-radius: 8px;
+            border-radius: $borderRadius;
             transition: all 0.2s;
             &:hover {
                 background-color: #2a3942;
