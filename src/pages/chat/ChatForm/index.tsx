@@ -1,33 +1,54 @@
 import { useState } from "react"
 import './index.scss'
 import { chatSlice } from "../../../store/Chat"
-import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../../../hooks/useAppDispatch"
 export const ChatForm = () => {
-    const [chatId, setChatId] = useState('')
+    const [number, setNumber] = useState('')
+    const [err, setErr] = useState('')
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const { pushPhone } = chatSlice.actions
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setChatId(e.currentTarget.value)
+        setNumber(e.currentTarget.value)
     }
-    const onPushChatIdClick = () => {
-        localStorage.setItem('chatId', chatId)
-        dispatch(pushPhone(chatId))
+    const onPushChatIdClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        const telNumLength = 11
+        if (number.length === telNumLength) {
+            localStorage.setItem('chatId', `${number}@c.us`)
+            dispatch(pushPhone(`${number}@c.us`))
+            setErr('')
+        } else {
+            setErr(`Длина номера должна быть ${telNumLength} символов`)
+        }
     }
     return (
-        <form className="chat-form">
-            <input
-                className="chat-form__input"
-                placeholder="Введите номер собеседника"
-                type="number"
-                onChange={e => onInputChange(e)}
-            />
-            <button
-                onClick={onPushChatIdClick}
+        <>
+            <label
+                className="chat-form__label"
+                htmlFor="phoneNumber"
             >
-                Найти
-            </button>
-        </form>
+                Номер телефона собеседника
+            </label>
+            <form className="chat-form">
+                <input
+                    id='phoneNumber'
+                    className="chat-form__input"
+                    placeholder="Введите номер собеседника"
+                    type="number"
+                    onChange={e => onInputChange(e)}
+                />
+                <button onClick={e => onPushChatIdClick(e)}>
+                    Перейти к чату
+                </button>
+                {
+                    err &&
+                    <div className="chat-form__err">
+                        {err}
+                    </div>
+                }
+            </form>
+        </>
     )
 }
