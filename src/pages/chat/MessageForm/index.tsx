@@ -1,16 +1,16 @@
-import { useDispatch } from "react-redux"
 import { typedUseSelector } from "../../../hooks/typedUseSelector"
 import { messageSlice } from "../../../store/Message"
 import { messageType } from "../../../types/messageType"
 import { sendMessage } from "../../../api/api"
 import { useState } from 'react'
+import { useAppDispatch } from "../../../hooks/useAppDispatch"
 
 export const MessageForm = () => {
     const [messageText, setMessageText] = useState('')
 
     const { chatId } = typedUseSelector(state => state.chatReducer)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const { pushMessage } = messageSlice.actions
 
@@ -20,19 +20,21 @@ export const MessageForm = () => {
     }
 
     const onMessageSendClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const today = new Date()
-        const currentTime = `${today.getHours()}:${today.getMinutes()}`
-
-        const message: messageType = {
-            text: messageText,
-            time: currentTime,
-            isSelf: true
-        }
-
         e.preventDefault()
-        sendMessage("79215796096@c.us", messageText)
-        dispatch(pushMessage(message))
-        setMessageText('')
+        if (messageText) {
+            const today = new Date()
+            const currentTime = `${today.getHours()}:${today.getMinutes()}`
+
+            const message: messageType = {
+                text: messageText,
+                time: currentTime,
+                isSelf: true
+            }
+
+            sendMessage(`${chatId}@c.us`, messageText)
+            dispatch(pushMessage(message))
+            setMessageText('')
+        }
     }
 
     return (

@@ -1,25 +1,20 @@
 import { useState } from "react"
 import './index.scss'
-import { check } from "../../api/api"
-import { loginSlice } from "../../store/Login"
-import { useDispatch } from "react-redux"
-
+import { checkAC } from "../../store/Login/actionCreator"
+import { useAppDispatch } from "../../hooks/useAppDispatch"
+import { typedUseSelector } from "../../hooks/typedUseSelector"
+//@ts-ignore
+import spinner from "../../icons/spinner.gif"
 export const WelcomePage = () => {
+    const { isLoading, Error } = typedUseSelector(state => state.loginReducer)
     const [idInstance, setIdInstance] = useState('')
     const [token, setToken] = useState('')
 
-    const dispatch = useDispatch()
-    const { pushIdInstance, pushApiTokenInstance } = loginSlice.actions
-    
+    const dispatch = useAppDispatch()
+
     const onSaveDataClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        const res = await check(idInstance, token)
-        if (res?.data.stateInstance === "authorized") {
-            dispatch(pushIdInstance(idInstance))
-            dispatch(pushApiTokenInstance(token))
-            localStorage.setItem('idInstance', idInstance)
-            localStorage.setItem('apiTokenInstance', token)
-        }
+        dispatch(await checkAC(idInstance, token))
     }
 
     return (
@@ -28,19 +23,44 @@ export const WelcomePage = () => {
                 Добро пожаловать
             </h2>
             <form className="welcome-page__form">
-                <label htmlFor="instance">
-
+                <label
+                    className="welcome-page__label"
+                    htmlFor="idInstance"
+                >
+                    idInstance
                 </label>
                 <input
+                    id="idInstance"
                     placeholder="Введите idInstance"
                     onChange={e => setIdInstance(e.currentTarget.value)}
                 />
+                <label
+                    className="welcome-page__label"
+                    htmlFor="apiTokenInstance"
+                >
+                    apiTokenInstance
+                </label>
                 <input
+                    id="apiTokenInstance"
                     placeholder="Введите apiTokenInstance"
                     onChange={e => setToken(e.currentTarget.value)}
                 />
+                {
+                    Error &&
+                    <div className="welcome-page__err">
+                        {Error}
+                    </div>
+                }
                 <button onClick={e => onSaveDataClick(e)}>
-                    Войти
+                    {
+                        isLoading
+                            ? <img
+                                className="welcome-page__spinner"
+                                src={spinner}
+                            />
+                            : "Войти"
+
+                    }
                 </button>
             </form>
         </div>

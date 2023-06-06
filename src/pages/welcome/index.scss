@@ -1,4 +1,4 @@
-@import '~/src/variables.scss';
+@import "~/src/variables.scss";
 
 .welcome-page {
     height: 100%;
@@ -10,6 +10,24 @@
         font-weight: 500;
         font-size: 30px;
         margin-bottom: 20px;
+    }
+
+    &__err {
+        width: fit-content;
+        margin: 0 auto;
+        padding: 10px 15px;
+        color: #c2a4a4;
+        background-color: #4a1c1c;
+        border-radius: $borderRadius;
+    }
+
+    &__spinner {
+        height: 20px;
+        width: 20px;
+    }
+    &__label {
+        align-self: start;
+        margin-left: 10px;
     }
     &__form {
         display: flex;

@@ -1,6 +1,7 @@
-@import '~/src/variables.scss';
+@import "~/src/variables.scss";
 
 .chat-page {
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -23,14 +24,17 @@
 
     &__messages {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
+        justify-content: end;
         height: 100%;
         background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url("../../icons/background.png");
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
         background-position: top;
-        & > :first-child {
+        overflow: auto;
+
+        & > :last-child {
             margin: 5px 20px 15px;
         }
     }

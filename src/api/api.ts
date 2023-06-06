@@ -39,7 +39,7 @@ export const sendMessage = async (
 export const receiveNotification = async () => {
     try {
         const res = await host.get<notificationResType>(`waInstance${idInstance}/receiveNotification/${apiTokenInstance}`)
-        return res.data
+        return res
     } catch (error) {
         console.error(error);
     }
