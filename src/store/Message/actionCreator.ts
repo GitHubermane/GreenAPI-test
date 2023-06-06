@@ -34,9 +34,9 @@ export const receiveNotificationAC = () => async (dispatch: DispatchType) => {
                     time,
                     isSelf: false,
                 }))
-                //  После получения уведомления его надо удалить
-                await deleteNotification(res.receiptId)
             }
+            //  После получения уведомления его надо удалить
+            await deleteNotification(res.receiptId)
         }
         //  Как только приходит ответ и если его статус 200
         //  рекурсивно отправляем запрос

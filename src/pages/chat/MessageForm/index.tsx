@@ -30,10 +30,12 @@ export const MessageForm = () => {
                 time: currentTime,
                 isSelf: true
             }
-
-            sendMessage(`${chatId}@c.us`, messageText)
-            dispatch(pushMessage(message))
-            setMessageText('')
+            
+            if (chatId) {
+                sendMessage(chatId, messageText)
+                dispatch(pushMessage(message))
+                setMessageText('')
+            }
         }
     }
 
